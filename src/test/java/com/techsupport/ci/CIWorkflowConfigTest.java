@@ -114,15 +114,10 @@ class CIWorkflowConfigTest {
     assertThat(content).as("Workflow should set artifact retention").contains("retention-days: 30");
   }
 
-  /** AC-1.2.3: Verify SonarCloud integration step */
-  @Test
-  void workflowShouldIncludeSonarCloudStep() throws IOException {
-    String content = Files.readString(WORKFLOW_FILE);
-
-    assertThat(content).as("Workflow should run SonarCloud analysis").contains("./gradlew sonar");
-
-    assertThat(content).as("Workflow should use SONAR_TOKEN secret").contains("SONAR_TOKEN:");
-  }
+  /**
+   * AC-1.2.3: SonarCloud integration removed from CI workflow
+   * SonarCloud uses automatic scheduled scans every 10 days instead
+   */
 
   /** AC-1.2.3: Verify sonar-project.properties exists and is configured */
   @Test
@@ -177,7 +172,7 @@ class CIWorkflowConfigTest {
     int spotlessIdx = findStepIndex(lines, "spotlessCheck");
     int buildIdx = findStepIndex(lines, "clean build");
     int jacocoIdx = findStepIndex(lines, "jacocoTestReport");
-    int sonarIdx = findStepIndex(lines, "sonar");
+    int uploadIdx = findStepIndex(lines, "upload-artifact");
 
     // Verify order
     assertThat(checkoutIdx).as("Checkout should be first").isLessThan(javaSetupIdx);
@@ -189,7 +184,9 @@ class CIWorkflowConfigTest {
         .isLessThan(spotlessIdx);
     assertThat(spotlessIdx).as("Spotless check should come before build").isLessThan(buildIdx);
     assertThat(buildIdx).as("Build should come before JaCoCo report").isLessThan(jacocoIdx);
-    assertThat(jacocoIdx).as("JaCoCo report should come before Sonar").isLessThan(sonarIdx);
+    assertThat(jacocoIdx)
+        .as("JaCoCo report should come before artifact upload")
+        .isLessThan(uploadIdx);
   }
 
   private int findStepIndex(List<String> lines, String keyword) {
