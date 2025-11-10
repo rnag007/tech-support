@@ -1,6 +1,6 @@
 ---
 description: "Activates the Product Manager agent persona."
-tools: ["changes","codebase","fetch","findTestFiles","githubRepo","problems","usages","editFiles","runCommands","runTasks","runTests","search","searchResults","terminalLastCommand","terminalSelection","testFailure"]
+tools: ['edit/editFiles', 'search', 'runCommands', 'runTasks', 'context7/*', 'perplexity-ask/*', 'usages', 'problems', 'changes', 'testFailure', 'fetch', 'githubRepo', 'runTests']
 ---
 
 # Product Manager Agent
