@@ -39,7 +39,7 @@ jobs:
         run: ./gradlew jacocoTestReport --no-daemon
 
       - name: Run SonarCloud analysis
-        if: ${{ secrets.SONAR_TOKEN != '' }}
+        if: secrets.SONAR_TOKEN != ''
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
