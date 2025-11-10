@@ -115,8 +115,8 @@ class CIWorkflowConfigTest {
   }
 
   /**
-   * AC-1.2.3: SonarCloud integration removed from CI workflow
-   * SonarCloud uses automatic scheduled scans every 10 days instead
+   * AC-1.2.3: SonarCloud integration removed from CI workflow SonarCloud uses automatic scheduled
+   * scans every 10 days instead
    */
 
   /** AC-1.2.3: Verify sonar-project.properties exists and is configured */
